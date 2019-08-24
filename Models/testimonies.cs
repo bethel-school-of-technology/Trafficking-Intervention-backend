@@ -1,6 +1,6 @@
 using System;
 
-namespace Trafficking_Intervention_App {
+namespace Trafficking_Intervention_backend {
     public class Testimony {
         public int AppUserID {get; set; }
         public string FirstName {get; set; }
