@@ -3,7 +3,7 @@
 This backend project was generated with a [ASP.NETCore 2.2] WebAPI.
 (https://dotnet.microsoft.com/download)
 
-##Development server
+## Development server
 
 Clone the WebAPI from the following github location [Trafficking-Intervention-backend]
 (https://github.com/bethel-school-of-technology/Trafficking-Intervention-backend.git)
