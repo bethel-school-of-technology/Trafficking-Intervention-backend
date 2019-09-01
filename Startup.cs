@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 
 namespace Trafficking_Intervention_backend
 {
@@ -33,6 +34,9 @@ namespace Trafficking_Intervention_backend
                         .AllowAnyHeader()
                         );
             });
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite("Data Source=traff-int-app.db"));
 
             services.AddMvc();
         }
