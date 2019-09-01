@@ -1,7 +1,8 @@
 # Trafficking-Intervention-backend
 
-This backend project was generated with a [ASP.NETCore 2.2] WebAPI.
+This backend project was generated with a [ASP.NETCore 2.2]
 (https://dotnet.microsoft.com/download)
+ WebAPI.
 
 ## Development server
 
