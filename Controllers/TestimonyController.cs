@@ -26,7 +26,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 // create a string to hold the SQL command.
-                string sql = $"select * from prayer_requests;";
+                string sql = $"select * from testimonies;";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -77,7 +77,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"insert into prayer_requests (FirstName, LastName, Prayer_Request, Date, Sites) values (\"{postTestimony.FirstName}\", \"{postTestimony.LastName}\", \"{postTestimony.Testimony}\", \"{postTestimony.Date}\", \"{postTestimony.Sites}\");";
+                string sql = $"insert into testimonies (FirstName, LastName, Testimony, Date, Sites) values (\"{postTestimony.FirstName}\", \"{postTestimony.LastName}\", \"{postTestimony.Testimony}\", \"{postTestimony.Date}\", \"{postTestimony.Sites}\");";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
