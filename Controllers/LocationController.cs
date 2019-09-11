@@ -10,14 +10,14 @@ namespace Trafficking_Intervention_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PrayerRequestController : ControllerBase
+    public class LocationController : ControllerBase
     {
-        // GET api/PrayerRequest
+        // GET api/Location
         [HttpGet]
-        public List<PrayerRequestEntity> GetPrayerRequests() {
+        public List<LocationEntity> GetLocations() {
 
-            // PrayerRequest will be populated with the result of the query.
-            List<PrayerRequestEntity> prayerRequest = new List<PrayerRequestEntity>();
+            // Location will be populated with the result of the query.
+            List<LocationEntity> Location = new List<LocationEntity>();
 
             // GetFullPath will complete the path for the file named passed in as a string.
             string dataSource = "Data Source=" + Path.GetFullPath("traff-int-app.db");
@@ -26,7 +26,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 // create a string to hold the SQL command.
-                string sql = $"select * from prayer_requests;";
+                string sql = $"select * from locations;";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -37,37 +37,38 @@ namespace Trafficking_Intervention_backend.Controllers
                         // Loop through query exit when no more objects are left.
                         while (reader.Read()) {
 
-                            // map the data to the prayerRequests model.
-                            PrayerRequestEntity newPrayerRequest = new PrayerRequestEntity() {
-                                AppUserID = reader.GetInt32(0),
-                                FirstName = reader.GetString(1),
-                                LastName = reader.GetString(2),
-                                PrayerRequest = reader.GetString(3),
-                                Date = reader.GetString(4),
-                                Sites = reader.GetString(5)
+                            // map the data to the Locations model.
+                            LocationEntity newLocation = new LocationEntity() {
+                                LocationID = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Address = reader.GetString(2),
+                                City = reader.GetString(3),
+                                State = reader.GetString(4),
+                                ZipCode = reader.GetInt32(5),
+                                LocationType = reader.GetString(6)
                             };
 
                             // Add one to the list.
-                            prayerRequest.Add(newPrayerRequest);
+                            Location.Add(newLocation);
                         }
                     }
                 }
                 // close the connection
                 conn.Close();
             }
-            return prayerRequest;
+            return Location;
         }
 
-        // // GET api/PrayerRequest/user
+        // // GET api/Location/user
         // [HttpGet("{id}")]
         // public ActionResult<string> Get(int id)
         // {
         //     return "value";
         // }
 
-        // POST api/PrayerRequest
+        // POST api/Location
         [HttpPost]
-        public void PostPrayerRequest([FromBody] PrayerRequestEntity postPrayerRequest)
+        public void PostLocation([FromBody] LocationEntity postLocation)
         {
 
             // GetFullPath will complete the path for the file named passed in as a string.
@@ -77,7 +78,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"insert into prayer_requests (FirstName, LastName, PrayerRequest, Date, Sites) values (\"{postPrayerRequest.FirstName}\", \"{postPrayerRequest.LastName}\", \"{postPrayerRequest.PrayerRequest}\", \"{postPrayerRequest.Date}\", \"{postPrayerRequest.Sites}\");";
+                string sql = $"insert into locations (Name, Address, City, State, ZipCode, LocationType) values (\"{postLocation.Name}\", \"{postLocation.Address}\", \"{postLocation.City}\", \"{postLocation.State}\", \"{postLocation.ZipCode}\", \"{postLocation.LocationType}\");";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -89,9 +90,9 @@ namespace Trafficking_Intervention_backend.Controllers
             return;           
         }
 
-        // PUT api/PrayerRequest/"named-put"
+        // PUT api/Location/"named-put"
         [HttpPut]
-        public void Put([FromBody] PrayerRequestEntity putPrayerRequest)
+        public void Put([FromBody] LocationEntity putLocation)
         {
 
             // GetFullPath will complete the path for the file named passed in as a string.
@@ -101,7 +102,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"update prayer_requests set FirstName = \"{putPrayerRequest.FirstName}\", LastName = \"{putPrayerRequest.LastName}\", PrayerRequest = \"{putPrayerRequest.PrayerRequest}\", Date = \"{putPrayerRequest.Date}\", Sites = \"{putPrayerRequest.Sites}\"  where LastName = \"{putPrayerRequest.LastName}\";";
+                string sql = $"update locations set Name = \"{putLocation.Name}\", Address = \"{putLocation.Address}\", City = \"{putLocation.City}\", State = \"{putLocation.State}\", ZipCode = \"{putLocation.ZipCode}\", LocatioType = \"{putLocation.LocationType}\"  where Name = \"{putLocation.Name}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -113,9 +114,9 @@ namespace Trafficking_Intervention_backend.Controllers
             return;
         }
 
-        // DELETE api/PrayerRequest/"named-delete"
+        // DELETE api/Location/"named-delete"
         [HttpDelete]
-        public void Delete([FromBody] PrayerRequestEntity dropPrayerRequest)
+        public void Delete([FromBody] LocationEntity dropLocation)
         {
             // GetFullPath will complete the path for the file named passed in as a string.
             string dataSource = "Data Source=" + Path.GetFullPath("traff-int-app.db");
@@ -124,7 +125,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"delete from prayer_requests where FirstName = \"{dropPrayerRequest.FirstName}\" and LastName = \"{dropPrayerRequest.LastName}\";";
+                string sql = $"delete from locations where Name = \"{dropLocation.Name}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {

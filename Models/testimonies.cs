@@ -7,7 +7,7 @@ namespace Trafficking_Intervention_backend {
         public string LastName {get; set; }
         public string Testimony {get; set; }
 
-        public DateTime Date {get; set; }
+        public string Date {get; set; }
         
         public string Sites {get; set; }
         

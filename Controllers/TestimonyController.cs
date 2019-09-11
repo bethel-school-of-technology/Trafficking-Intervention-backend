@@ -43,7 +43,7 @@ namespace Trafficking_Intervention_backend.Controllers
                                 FirstName = reader.GetString(1),
                                 LastName = reader.GetString(2),
                                 Testimony = reader.GetString(3),
-                                Date = reader.GetDateTime(4),
+                                Date = reader.GetString(4),
                                 Sites = reader.GetString(5)
                             };
 
@@ -58,12 +58,12 @@ namespace Trafficking_Intervention_backend.Controllers
             return Testimony;
         }
 
-        // GET api/Testimony/user
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
-        {
-            return "value";
-        }
+        // // GET api/Testimony/user
+        // [HttpGet("{id}")]
+        // public ActionResult<string> Get(int id)
+        // {
+        //     return "value";
+        // }
 
         // POST api/Testimony
         [HttpPost]
@@ -89,16 +89,51 @@ namespace Trafficking_Intervention_backend.Controllers
             return;           
         }
 
-        // PUT api/Testimony/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string Testimony)
+        // PUT api/Testimony/"named-put"
+        [HttpPut]
+        public void Put([FromBody] TestimonyEntity putTestimony)
         {
+
+            // GetFullPath will complete the path for the file named passed in as a string.
+            string dataSource = "Data Source=" + Path.GetFullPath("traff-int-app.db");
+
+            // Initialize the connection to the .db file.
+            using(SqliteConnection conn = new SqliteConnection(dataSource)) {
+                conn.Open();
+                
+                string sql = $"update testimonies set FirstName = \"{putTestimony.FirstName}\", LastName = \"{putTestimony.LastName}\", Testimony = \"{putTestimony.Testimony}\", Date = \"{putTestimony.Date}\", Sites = \"{putTestimony.Sites}\"  where LastName = \"{putTestimony.LastName}\";";
+
+                // create a new SQL command by combining the location and command string.
+                using(SqliteCommand command = new SqliteCommand(sql, conn)) {
+                    command.ExecuteNonQuery();
+                }
+                // close the connection
+                conn.Close();
+            }
+            return;
         }
 
-        // DELETE api/Testimony/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE api/Testimony/"named-delete"
+        [HttpDelete]
+        public void Delete([FromBody] TestimonyEntity dropTestimony)
         {
+            // GetFullPath will complete the path for the file named passed in as a string.
+            string dataSource = "Data Source=" + Path.GetFullPath("traff-int-app.db");
+
+            // Initialize the connection to the .db file.
+            using(SqliteConnection conn = new SqliteConnection(dataSource)) {
+                conn.Open();
+                
+                string sql = $"delete from testimonies where FirstName = \"{dropTestimony.FirstName}\" and LastName = \"{dropTestimony.LastName}\";";
+
+                // create a new SQL command by combining the location and command string.
+                using(SqliteCommand command = new SqliteCommand(sql, conn)) {
+                    command.ExecuteNonQuery();
+                }
+                // close the connection
+                conn.Close();
+            }
+            return;
         }
     }
 }
