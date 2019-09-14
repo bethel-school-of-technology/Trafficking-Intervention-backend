@@ -9,7 +9,7 @@ namespace Trafficking_Intervention_backend {
           
         public string date {get; set; }
         
-        public string sites {get; set; }
+        public string site {get; set; }
         
     }
 }

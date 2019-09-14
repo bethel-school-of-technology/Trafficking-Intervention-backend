@@ -44,7 +44,7 @@ namespace Trafficking_Intervention_backend.Controllers
                                 lastName = reader.GetString(2),
                                 prayer = reader.GetString(3),
                                 date = reader.GetString(4),
-                                sites = reader.GetString(5)
+                                site = reader.GetString(5)
                             };
 
                             // Add one to the list.
@@ -77,7 +77,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"insert into prayer_requests (FirstName, LastName, PrayerRequest, Date, Sites) values (\"{postPrayerRequest.firstName}\", \"{postPrayerRequest.lastName}\", \"{postPrayerRequest.prayer}\", \"{postPrayerRequest.date}\", \"{postPrayerRequest.sites}\");";
+                string sql = $"insert into prayer_requests (FirstName, LastName, PrayerRequest, Date, Sites) values (\"{postPrayerRequest.firstName}\", \"{postPrayerRequest.lastName}\", \"{postPrayerRequest.prayer}\", \"{postPrayerRequest.date}\", \"{postPrayerRequest.site}\");";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -101,7 +101,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"update prayer_requests set FirstName = \"{putPrayerRequest.firstName}\", LastName = \"{putPrayerRequest.lastName}\", PrayerRequest = \"{putPrayerRequest.prayer}\", Date = \"{putPrayerRequest.date}\", Sites = \"{putPrayerRequest.sites}\"  where LastName = \"{putPrayerRequest.lastName}\";";
+                string sql = $"update prayer_requests set FirstName = \"{putPrayerRequest.firstName}\", LastName = \"{putPrayerRequest.lastName}\", PrayerRequest = \"{putPrayerRequest.prayer}\", Date = \"{putPrayerRequest.date}\", Sites = \"{putPrayerRequest.site}\"  where LastName = \"{putPrayerRequest.lastName}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
