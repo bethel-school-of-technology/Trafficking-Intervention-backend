@@ -39,13 +39,13 @@ namespace Trafficking_Intervention_backend.Controllers
 
                             // map the data to the Locations model.
                             LocationEntity newLocation = new LocationEntity() {
-                                LocationID = reader.GetInt32(0),
-                                Name = reader.GetString(1),
-                                Address = reader.GetString(2),
-                                City = reader.GetString(3),
-                                State = reader.GetString(4),
-                                ZipCode = reader.GetInt32(5),
-                                LocationType = reader.GetString(6)
+                                locationID = reader.GetInt32(0),
+                                name = reader.GetString(1),
+                                address = reader.GetString(2),
+                                city = reader.GetString(3),
+                                state = reader.GetString(4),
+                                zipCode = reader.GetInt32(5),
+                                locationType = reader.GetString(6)
                             };
 
                             // Add one to the list.
@@ -78,7 +78,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"insert into locations (Name, Address, City, State, ZipCode, LocationType) values (\"{postLocation.Name}\", \"{postLocation.Address}\", \"{postLocation.City}\", \"{postLocation.State}\", \"{postLocation.ZipCode}\", \"{postLocation.LocationType}\");";
+                string sql = $"insert into locations (Name, Address, City, State, ZipCode, LocationType) values (\"{postLocation.name}\", \"{postLocation.address}\", \"{postLocation.city}\", \"{postLocation.state}\", \"{postLocation.zipCode}\", \"{postLocation.locationType}\");";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -102,7 +102,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"update locations set Name = \"{putLocation.Name}\", Address = \"{putLocation.Address}\", City = \"{putLocation.City}\", State = \"{putLocation.State}\", ZipCode = \"{putLocation.ZipCode}\", LocatioType = \"{putLocation.LocationType}\"  where Name = \"{putLocation.Name}\";";
+                string sql = $"update locations set Name = \"{putLocation.name}\", Address = \"{putLocation.address}\", City = \"{putLocation.city}\", State = \"{putLocation.state}\", ZipCode = \"{putLocation.zipCode}\", LocatioType = \"{putLocation.locationType}\"  where Name = \"{putLocation.name}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -125,7 +125,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"delete from locations where Name = \"{dropLocation.Name}\";";
+                string sql = $"delete from locations where Name = \"{dropLocation.name}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {

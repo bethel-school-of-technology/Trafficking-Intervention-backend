@@ -40,11 +40,11 @@ namespace Trafficking_Intervention_backend.Controllers
                             // map the data to the Testimonys model.
                             TestimonyEntity newTestimony = new TestimonyEntity() {
                                 AppUserID = reader.GetInt32(0),
-                                FirstName = reader.GetString(1),
-                                LastName = reader.GetString(2),
-                                Testimony = reader.GetString(3),
-                                Date = reader.GetString(4),
-                                Sites = reader.GetString(5)
+                                firstName = reader.GetString(1),
+                                lastName = reader.GetString(2),
+                                testimony = reader.GetString(3),
+                                date = reader.GetString(4),
+                                site = reader.GetString(5)
                             };
 
                             // Add one to the list.
@@ -77,7 +77,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"insert into testimonies (FirstName, LastName, Testimony, Date, Sites) values (\"{postTestimony.FirstName}\", \"{postTestimony.LastName}\", \"{postTestimony.Testimony}\", \"{postTestimony.Date}\", \"{postTestimony.Sites}\");";
+                string sql = $"insert into testimonies (FirstName, LastName, Testimony, Date, Sites) values (\"{postTestimony.firstName}\", \"{postTestimony.lastName}\", \"{postTestimony.testimony}\", \"{postTestimony.date}\", \"{postTestimony.site}\");";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -101,7 +101,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"update testimonies set FirstName = \"{putTestimony.FirstName}\", LastName = \"{putTestimony.LastName}\", Testimony = \"{putTestimony.Testimony}\", Date = \"{putTestimony.Date}\", Sites = \"{putTestimony.Sites}\"  where LastName = \"{putTestimony.LastName}\";";
+                string sql = $"update testimonies set FirstName = \"{putTestimony.firstName}\", LastName = \"{putTestimony.lastName}\", Testimony = \"{putTestimony.testimony}\", Date = \"{putTestimony.date}\", Sites = \"{putTestimony.site}\"  where LastName = \"{putTestimony.lastName}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -124,7 +124,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"delete from testimonies where FirstName = \"{dropTestimony.FirstName}\" and LastName = \"{dropTestimony.LastName}\";";
+                string sql = $"delete from testimonies where FirstName = \"{dropTestimony.firstName}\" and LastName = \"{dropTestimony.lastName}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {

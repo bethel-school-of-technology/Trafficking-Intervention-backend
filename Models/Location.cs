@@ -2,13 +2,13 @@ using System;
 
 namespace Trafficking_Intervention_backend {
     public class LocationEntity {
-        public int LocationID {get; set; }
-        public string Name {get; set; }
-        public string Address {get; set; }
-        public string City {get; set; }
-        public string State {get; set; }        
-        public int ZipCode {get; set; }
-        public string LocationType {get; set;}
+        public int locationID {get; set; }
+        public string name {get; set; }
+        public string address {get; set; }
+        public string city {get; set; }
+        public string state {get; set; }        
+        public int zipCode {get; set; }
+        public string locationType {get; set;}
 
         
     }
