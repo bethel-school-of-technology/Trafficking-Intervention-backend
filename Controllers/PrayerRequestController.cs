@@ -40,11 +40,11 @@ namespace Trafficking_Intervention_backend.Controllers
                             // map the data to the prayerRequests model.
                             PrayerRequestEntity newPrayerRequest = new PrayerRequestEntity() {
                                 AppUserID = reader.GetInt32(0),
-                                FirstName = reader.GetString(1),
-                                LastName = reader.GetString(2),
-                                PrayerRequest = reader.GetString(3),
-                                Date = reader.GetString(4),
-                                Sites = reader.GetString(5)
+                                firstName = reader.GetString(1),
+                                lastName = reader.GetString(2),
+                                prayer = reader.GetString(3),
+                                date = reader.GetString(4),
+                                sites = reader.GetString(5)
                             };
 
                             // Add one to the list.
@@ -77,7 +77,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"insert into prayer_requests (FirstName, LastName, PrayerRequest, Date, Sites) values (\"{postPrayerRequest.FirstName}\", \"{postPrayerRequest.LastName}\", \"{postPrayerRequest.PrayerRequest}\", \"{postPrayerRequest.Date}\", \"{postPrayerRequest.Sites}\");";
+                string sql = $"insert into prayer_requests (FirstName, LastName, PrayerRequest, Date, Sites) values (\"{postPrayerRequest.firstName}\", \"{postPrayerRequest.lastName}\", \"{postPrayerRequest.prayer}\", \"{postPrayerRequest.date}\", \"{postPrayerRequest.sites}\");";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -101,7 +101,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"update prayer_requests set FirstName = \"{putPrayerRequest.FirstName}\", LastName = \"{putPrayerRequest.LastName}\", PrayerRequest = \"{putPrayerRequest.PrayerRequest}\", Date = \"{putPrayerRequest.Date}\", Sites = \"{putPrayerRequest.Sites}\"  where LastName = \"{putPrayerRequest.LastName}\";";
+                string sql = $"update prayer_requests set FirstName = \"{putPrayerRequest.firstName}\", LastName = \"{putPrayerRequest.lastName}\", PrayerRequest = \"{putPrayerRequest.prayer}\", Date = \"{putPrayerRequest.date}\", Sites = \"{putPrayerRequest.sites}\"  where LastName = \"{putPrayerRequest.lastName}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
@@ -124,7 +124,7 @@ namespace Trafficking_Intervention_backend.Controllers
             using(SqliteConnection conn = new SqliteConnection(dataSource)) {
                 conn.Open();
                 
-                string sql = $"delete from prayer_requests where FirstName = \"{dropPrayerRequest.FirstName}\" and LastName = \"{dropPrayerRequest.LastName}\";";
+                string sql = $"delete from prayer_requests where FirstName = \"{dropPrayerRequest.firstName}\" and LastName = \"{dropPrayerRequest.lastName}\";";
 
                 // create a new SQL command by combining the location and command string.
                 using(SqliteCommand command = new SqliteCommand(sql, conn)) {
