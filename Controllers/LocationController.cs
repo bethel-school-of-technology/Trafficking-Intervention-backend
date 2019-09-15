@@ -44,7 +44,7 @@ namespace Trafficking_Intervention_backend.Controllers
                                 address = reader.GetString(2),
                                 city = reader.GetString(3),
                                 state = reader.GetString(4),
-                                zipCode = reader.GetInt32(5),
+                                zipCode = reader.GetString(5),
                                 locationType = reader.GetString(6)
                             };
 

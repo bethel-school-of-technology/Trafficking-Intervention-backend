@@ -7,7 +7,7 @@ namespace Trafficking_Intervention_backend {
         public string address {get; set; }
         public string city {get; set; }
         public string state {get; set; }        
-        public int zipCode {get; set; }
+        public string zipCode {get; set; }
         public string locationType {get; set;}
 
         
